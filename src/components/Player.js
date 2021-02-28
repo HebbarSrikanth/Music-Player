@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlay, faAngleLeft, faAngleRight, faPause } from '@fortawesome/free-solid-svg-icons'
 
@@ -9,8 +9,17 @@ const Progress = ({ currentSong }) => {
         currentInfo: 0,
         duration: 0
     })
+
+    useEffect(() => {
+        if (isPlaying) {
+            ref.current.play()
+        }
+        //eslint-disable-next-line
+    }, [currentSong])
+
     //Reference for audio tag
     const ref = useRef(null)
+
     //Play/Pause Handler
     const playHandler = () => {
         if (isPlaying) {
@@ -41,6 +50,8 @@ const Progress = ({ currentSong }) => {
         })
         ref.current.currentTime = e.target.value
     }
+
+
     return (
         <div className='player'>
             <div className='time-control'>
@@ -48,7 +59,7 @@ const Progress = ({ currentSong }) => {
                 <input type='range'
                     min={0}
                     value={currenTime.currentInfo}
-                    max={currenTime.duration}
+                    max={currenTime.duration || 0}
                     onChange={dragHandler}
                 />
                 <p>{getTime(currenTime.duration)}</p>
