@@ -11,10 +11,13 @@ const App = () => {
   const [currentSong, setCurrentSong] = useState(songs[0])
   const [showLibrary, setLibrary] = useState(false)
   return (
-    <div>
+    <div className={`container ${showLibrary ? 'library-active' : ''}`}>
       <Nav showLibrary={showLibrary} setLibrary={setLibrary} />
       <Song currentSong={currentSong} />
-      <Player currentSong={currentSong} />
+      <Player
+        currentSong={currentSong} setCurrentSong={setCurrentSong}
+        songs={songs} setSongs={setSongs}
+      />
       <Library
         songs={songs} showLibrary={showLibrary}
         setCurrentSong={setCurrentSong} setSongs={setSongs}

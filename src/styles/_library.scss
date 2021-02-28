@@ -1,5 +1,5 @@
 .library-container{
-    max-width: 20vw;
+    width: 15rem;
     height: 100%;
     overflow: scroll;
     background: white;
@@ -67,4 +67,10 @@
     background-color: rgba(155,155,255,0.6);
     border-radius: 50px;
     border:transparent
+}
+
+@media screen and (max-width:768px){
+    .library-container{
+        width: 100%;
+    }
 }
