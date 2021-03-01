@@ -3,6 +3,19 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay, faAngleLeft, faAngleRight, faPause } from "@fortawesome/free-solid-svg-icons";
 import AppContext from "../context/AppContext";
 
+//Call the time handler only once in 400 msec hence can reduce frequently calling it
+const throttle = (func, wait) => {
+    let timeout;
+    return (...args) => {
+        if (timeout) return;
+        let later = () => {
+            func(...args);
+            clearTimeout(timeout);
+        };
+        timeout = setTimeout(later, wait);
+    };
+};
+
 const Progress = () => {
     const appState = useContext(AppContext);
     const { currentSong, setCurrentSong, songs, setSongs } = appState;
@@ -107,7 +120,7 @@ const Progress = () => {
                 <FontAwesomeIcon className="skip-next" onClick={() => controlHandler("skip")} icon={faAngleRight} />
             </div>
             <audio
-                onTimeUpdate={timeHandler}
+                onTimeUpdate={throttle(timeHandler, 400)}
                 onEnded={() => controlHandler("skip")}
                 onLoadedMetadata={timeHandler}
                 ref={ref}
