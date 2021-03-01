@@ -14,6 +14,14 @@
     }
 }
 
+@keyframes spin{
+    100%{
+        transform: rotateZ(360deg);
+    }
+}
+
+
+
 @media screen and (max-width:768px){
     .song-container{
         img{

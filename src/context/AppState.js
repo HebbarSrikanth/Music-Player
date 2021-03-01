@@ -13,6 +13,7 @@ const AppState = (props) => {
         songs: songs,
         currentSong: songs[0],
         showLibrary: false,
+        isPlaying: false,
     };
 
     //Use Reducer to provide the state and dispatch function
@@ -35,7 +36,13 @@ const AppState = (props) => {
 
     const setLibrary = () => {
         dispatch({
-            type: "SET_LIBRARY",
+            type: Types.SET_LIBRARY,
+        });
+    };
+
+    const setPlaying = () => {
+        dispatch({
+            type: Types.SET_PLAYING,
         });
     };
 
@@ -45,9 +52,11 @@ const AppState = (props) => {
                 songs: state.songs,
                 currentSong: state.currentSong,
                 showLibrary: state.showLibrary,
+                isPlaying: state.isPlaying,
                 setSongs,
                 setCurrentSong,
                 setLibrary,
+                setPlaying,
             }}
         >
             {props.children}

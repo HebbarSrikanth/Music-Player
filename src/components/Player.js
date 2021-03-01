@@ -18,9 +18,9 @@ const throttle = (func, wait) => {
 
 const Progress = () => {
     const appState = useContext(AppContext);
-    const { currentSong, setCurrentSong, songs, setSongs } = appState;
+    const { currentSong, setCurrentSong, songs, setSongs, isPlaying, setPlaying } = appState;
     //State for playing/pausing
-    const [isPlaying, setPlaying] = useState(false);
+    //const [isPlaying, setPlaying] = useState(false);
     const [currenTime, setTime] = useState({
         currentInfo: 0,
         duration: 0,
@@ -41,10 +41,10 @@ const Progress = () => {
     const playHandler = () => {
         if (isPlaying) {
             ref.current.pause();
-            setPlaying(!isPlaying);
+            setPlaying();
         } else {
             ref.current.play();
-            setPlaying(!isPlaying);
+            setPlaying();
         }
     };
     //Sond Duration Update

@@ -20,6 +20,12 @@ const AppReducer = (state, action) => {
                 showLibrary: !state.showLibrary,
             };
 
+        case Types.SET_PLAYING:
+            return {
+                ...state,
+                isPlaying: !state.isPlaying,
+            };
+
         default:
             return state;
     }
